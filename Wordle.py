@@ -13,10 +13,21 @@ from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 def wordle():
 
     def enter_action(s):
-        gw.show_message("You have to implement this method.")
+        print(s)
+        if s.lower() in FIVE_LETTER_WORDS:
+            gw.show_message("Real word")
+        else:
+            gw.show_message("Not a real word")
 
     gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
+
+    newWord = random.choice(FIVE_LETTER_WORDS)
+    print(newWord)
+    rows = N_ROWS
+    cols = N_COLS
+    for n in (range(0, len(newWord))):
+        gw.set_square_letter(0, n, newWord[n])
 
 # Startup code
 
