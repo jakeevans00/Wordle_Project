@@ -20,6 +20,7 @@ def wordle():
     # wordToGuess = random.choice(FIVE_LETTER_WORDS)
     wordToGuess = "glass"
     tempList = wordToGuess
+    lettersUsed = []
     print(wordToGuess)
 
     def enter_action(s):
@@ -28,15 +29,18 @@ def wordle():
             gw.show_message("Real word")
 
             for n in range(0, len(wordToGuess)):
-                if (
-                    gw.get_square_letter(gw.get_current_row(), n).lower()
-                    == wordToGuess[n]
-                ):
+                letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
+
+                if letterGuess == wordToGuess[n]:
                     gw.set_square_color(gw.get_current_row(), n, CORRECT_COLOR)
-                elif gw.get_square_letter(gw.get_current_row(), n).lower() in tempList:
-                    gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
+                    lettersUsed.append(letterGuess)
+                elif letterGuess in tempList:
+                    if letterGuess not in lettersUsed:
+                        gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
+                    lettersUsed.append(letterGuess)
                 else:
                     gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
+                    lettersUsed.append(letterGuess)
 
             if s.lower() == wordToGuess:
                 gw.show_message(
