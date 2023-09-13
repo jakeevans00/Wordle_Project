@@ -48,6 +48,7 @@ def wordle():
                 )
             else:
                 gw.set_current_row(gw.get_current_row() + 1)
+                lettersUsed.clear()
         else:
             gw.show_message("Not a real word")
 
