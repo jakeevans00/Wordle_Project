@@ -1,6 +1,7 @@
 # Wordle_Project
 
 Wordle is a popular game developed by Josh Wardle - this project is a clone from scratch 
+![Wordle Graphic](https://www.nytimes.com/games-assets/v2/assets/wordle/wordle_og_1200x630.png)
 
 ### Milestone 1: Pick a random word and display it in the first row of boxes
 
