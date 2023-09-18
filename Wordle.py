@@ -13,8 +13,8 @@ from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
 
 def wordle():
-    # wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    wordToGuess = "ruder"
+    wordToGuess = random.choice(FIVE_LETTER_WORDS)
+    #wordToGuess = "ruder"
     tempList = wordToGuess
     lettersUsed = []
     print(wordToGuess)
