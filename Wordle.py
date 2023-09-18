@@ -17,8 +17,8 @@ def wordle():
     cols = N_COLS
     guess = 0
     win = False
-    # wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    wordToGuess = "glass"
+    wordToGuess = random.choice(FIVE_LETTER_WORDS)
+    # wordToGuess = "glass"
     tempList = wordToGuess
     lettersUsed = []
     print(wordToGuess)
@@ -37,6 +37,8 @@ def wordle():
                 elif letterGuess in tempList:
                     if letterGuess not in lettersUsed:
                         gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
+                    else:
+                        gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
                     lettersUsed.append(letterGuess)
                 else:
                     gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
