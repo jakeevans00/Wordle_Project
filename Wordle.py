@@ -14,41 +14,47 @@ from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
 def wordle():
     # wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    wordToGuess = "ruder"
-    tempList = wordToGuess
+    wordToGuess = "lifer"
     lettersUsed = []
+
     print(wordToGuess)
 
     def enter_action(s):
+        lettersLeft = list(wordToGuess)
         print(s)
         if s.lower() in FIVE_LETTER_WORDS:
             gw.show_message("Real word")
 
+            # Find all green colored squares
             for n in range(0, len(wordToGuess)):
                 letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
 
+                # if letter is in correct position, mark both square and key as green
                 if letterGuess == wordToGuess[n]:
                     gw.set_square_color(gw.get_current_row(), n, CORRECT_COLOR)
                     gw.set_key_color(letterGuess.upper(), CORRECT_COLOR)
-                    lettersUsed.append(letterGuess)
-                elif letterGuess in tempList:
-                    if letterGuess not in lettersUsed:
-                        gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
-                        if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
-                            continue
-                        else:
-                            gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
-                    else:
-                        gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
-                        if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
-                            continue
-                        else:
-                            gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
-                    lettersUsed.append(letterGuess)
+                    lettersLeft.remove(letterGuess.lower())
+                else:
+                    continue
+
+            # Find all remaining letters (Yellow)
+            for n in range(len(wordToGuess)):
+                letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
+
+                # if square is colored correctly, keep going
+                if gw.get_square_color(gw.get_current_row(), n) == CORRECT_COLOR:
+                    continue
+                # if letter is in the word
+                elif letterGuess in lettersLeft:
+                    gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
+                    gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
+                    lettersLeft.remove(letterGuess.lower())
                 else:
                     gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
-                    gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
-                    lettersUsed.append(letterGuess)
+                    if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
+                        continue
+                    else:
+                        gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
 
             if s.lower() == wordToGuess:
                 gw.show_message(
