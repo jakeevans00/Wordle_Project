@@ -13,12 +13,8 @@ from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
 
 def wordle():
-    rows = N_ROWS
-    cols = N_COLS
-    guess = 0
-    win = False
-    wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    # wordToGuess = "glass"
+    # wordToGuess = random.choice(FIVE_LETTER_WORDS)
+    wordToGuess = "ruder"
     tempList = wordToGuess
     lettersUsed = []
     print(wordToGuess)
@@ -33,15 +29,25 @@ def wordle():
 
                 if letterGuess == wordToGuess[n]:
                     gw.set_square_color(gw.get_current_row(), n, CORRECT_COLOR)
+                    gw.set_key_color(letterGuess.upper(), CORRECT_COLOR)
                     lettersUsed.append(letterGuess)
                 elif letterGuess in tempList:
                     if letterGuess not in lettersUsed:
                         gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
+                        if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
+                            continue
+                        else:
+                            gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
                     else:
                         gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
+                        if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
+                            continue
+                        else:
+                            gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
                     lettersUsed.append(letterGuess)
                 else:
                     gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
+                    gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
                     lettersUsed.append(letterGuess)
 
             if s.lower() == wordToGuess:
