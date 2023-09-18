@@ -14,7 +14,7 @@ from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
 def wordle():
     # wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    wordToGuess = "lifer"
+    wordToGuess = "glass"
     lettersUsed = []
 
     print(wordToGuess)
@@ -23,8 +23,6 @@ def wordle():
         lettersLeft = list(wordToGuess)
         print(s)
         if s.lower() in FIVE_LETTER_WORDS:
-            gw.show_message("Real word")
-
             # Find all green colored squares
             for n in range(0, len(wordToGuess)):
                 letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
@@ -44,7 +42,7 @@ def wordle():
                 # if square is colored correctly, keep going
                 if gw.get_square_color(gw.get_current_row(), n) == CORRECT_COLOR:
                     continue
-                # if letter is in the word
+                # if letter is in the word, color yellow and remove from list of remaining letters
                 elif letterGuess in lettersLeft:
                     gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
                     gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
@@ -60,13 +58,13 @@ def wordle():
                 gw.show_message(
                     "Congrats! Winner in " + str(gw.get_current_row() + 1) + "!!!"
                 )
+                return
             else:
                 gw.set_current_row(gw.get_current_row() + 1)
                 lettersUsed.clear()
         else:
             gw.show_message("Not a real word")
 
-        print(gw.get_current_row())
         return
 
     gw = WordleGWindow()
