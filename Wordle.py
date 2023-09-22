@@ -32,8 +32,9 @@ def wordle():
                     gw.set_square_color(gw.get_current_row(), n, CORRECT_COLOR)
                     gw.set_key_color(letterGuess.upper(), CORRECT_COLOR)
                     lettersLeft.remove(letterGuess.lower())
+                    print(lettersLeft)
                 else:
-                    continue
+                    pass
 
             # Find all remaining letters (Yellow)
             for n in range(len(wordToGuess)):
@@ -41,16 +42,25 @@ def wordle():
 
                 # if square is colored correctly, keep going
                 if gw.get_square_color(gw.get_current_row(), n) == CORRECT_COLOR:
-                    continue
+                    pass
                 # if letter is in the word, color yellow and remove from list of remaining letters
                 elif letterGuess in lettersLeft:
+                    print("in elif")
+                    print(lettersLeft)
                     gw.set_square_color(gw.get_current_row(), n, PRESENT_COLOR)
-                    gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
+                    if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
+                        pass
+                    else:
+                        gw.set_key_color(letterGuess.upper(), PRESENT_COLOR)
                     lettersLeft.remove(letterGuess.lower())
+                    print(lettersLeft)
                 else:
                     gw.set_square_color(gw.get_current_row(), n, MISSING_COLOR)
-                    if gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR:
-                        continue
+                    if (
+                        gw.get_key_color(letterGuess.upper()) == CORRECT_COLOR
+                        or gw.get_key_color(letterGuess.upper()) == PRESENT_COLOR
+                    ):
+                        pass
                     else:
                         gw.set_key_color(letterGuess.upper(), MISSING_COLOR)
 
