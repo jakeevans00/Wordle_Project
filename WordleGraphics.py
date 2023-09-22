@@ -9,6 +9,7 @@ import atexit
 import math
 import time
 import tkinter
+from tkinter import *
 
 # Constants
 
@@ -170,6 +171,31 @@ class WordleGWindow:
         self._row = 0
         self._col = 0
         atexit.register(start_event_loop)
+
+        def lang_change():
+            # Change the label text
+            def show():
+                label.config( text = clicked.get() )
+            
+            options = [
+                "English",
+                "Italian",
+                "Spanish"
+            ]
+            clicked = StringVar()
+
+            # initial menu text
+            clicked.set( "English" )
+            
+            label = Label( root , text = "Select Language" )
+            label.pack()
+
+            # Create Dropdown menu
+            drop = OptionMenu( root , clicked , *options )
+            drop.pack()
+            button = Button( root , text = "click Me" , command = show ).pack()
+            
+        self._lang = lang_change()
 
     def get_square_letter(self, row, col):
         return self._grid[row][col].get_letter()
