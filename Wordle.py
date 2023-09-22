@@ -7,7 +7,7 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 
 import random
 
-from WordleDictionary import FIVE_LETTER_WORDS
+from WordleDictionary import ENGLISH_WORDS, ITALIAN_WORDS 
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
@@ -24,7 +24,7 @@ def wordle():
 
     def enter_action(s):
         print(s)
-        if s.lower() in FIVE_LETTER_WORDS:
+        if s.lower() in ENGLISH_WORDS:
             gw.show_message("Real word")
             
             for n in range(0,len(wordToGuess)):
