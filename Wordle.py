@@ -6,20 +6,31 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 """
 
 import random
+import importlib
+import WordleGraphics
 
 from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
-from WordleGraphics import CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
 
 
 def wordle():
-    # wordToGuess = random.choice(FIVE_LETTER_WORDS)
-    wordToGuess = "glass"
+    wordToGuess = random.choice(FIVE_LETTER_WORDS)
+
     lettersUsed = []
 
     print(wordToGuess)
 
     def enter_action(s):
+        scheme = gw.get_color_scheme()
+        if scheme == "Original":
+            CORRECT_COLOR = "#66BB66"
+            PRESENT_COLOR = "#CCBB66"  # Brownish yellow for misplaced letters
+            MISSING_COLOR = "#999999"
+
+        elif scheme == "America":
+            CORRECT_COLOR = "#0047AB"
+            PRESENT_COLOR = "#D2042D"  # Brownish yellow for misplaced letters
+            MISSING_COLOR = "#999999"
         lettersLeft = list(wordToGuess)
         print(s)
         if s.lower() in FIVE_LETTER_WORDS:

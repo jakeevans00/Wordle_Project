@@ -9,6 +9,7 @@ import atexit
 import math
 import time
 import tkinter
+from tkinter import ttk, messagebox
 
 # Constants
 
@@ -48,6 +49,9 @@ KEY_LABELS = [
     ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"],
 ]
 
+COLOR_OPTIONS = ["Original", "America"]
+
+
 CLICK_MAX_DISTANCE = 2
 CLICK_MAX_DELAY = 0.5
 
@@ -65,10 +69,6 @@ class WordleGWindow:
 
     def __init__(self):
         """Creates the Wordle window."""
-
-        # create switch function
-        # def create_switch():
-        #     return Toggle()
 
         def create_grid():
             return [
@@ -165,7 +165,13 @@ class WordleGWindow:
         )
         canvas.pack()
         self._canvas = canvas
-        # self._switch = create_switch()
+
+        combo = ttk.Combobox(state="readonly", values=COLOR_OPTIONS)
+        combo.set("Original")
+        combo.bind("<<ComboboxSelected>>", self.set_color_scheme)
+        combo.place(x=5, y=5)
+        self._combo = combo
+
         self._grid = create_grid()
         self._message = create_message()
         self._keys = create_keyboard()
@@ -210,6 +216,14 @@ class WordleGWindow:
 
     def show_message(self, msg, color="Black"):
         self._message.set_text(msg, color)
+
+    def get_color_scheme(self):
+        return self._combo.get()
+
+    def set_color_scheme(self, event):
+        selection = self._combo.get()
+
+        return selection
 
 
 class WordleSquare:
