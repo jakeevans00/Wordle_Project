@@ -15,6 +15,8 @@ from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 def wordle():
     wordToGuess = random.choice(ENGLISH_WORDS)
+    WORDS = ENGLISH_WORDS
+    language = "English"
 
     def enter_action(s):
         scheme = gw.get_color_scheme()
@@ -27,13 +29,18 @@ def wordle():
             CORRECT_COLOR = "#0047AB"
             PRESENT_COLOR = "#D2042D"  # Brownish yellow for misplaced letters
             MISSING_COLOR = "#999999"
-        WORDS = []
+
         lang = gw.get_language()
-        if lang == "English":
+
+        if lang == language:
+            pass
+        elif lang == "English":
             wordToGuess = random.choice(ENGLISH_WORDS)
+            WORDS.clear()
             WORDS = ENGLISH_WORDS
             # print(wordToGuess)
         elif lang == "Italian":
+            WORDS.clear()
             wordToGuess = random.choice(ITALIAN_WORDS)
             WORDS = ITALIAN_WORDS
             # print(wordToGuess)
