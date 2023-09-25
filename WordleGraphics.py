@@ -176,7 +176,7 @@ class WordleGWindow:
         langcombo = ttk.Combobox(state="readonly", values=LANG_OPTIONS)
         langcombo.set("English")
         langcombo.bind("<<ComboboxSelected>>", self.set_language)
-        langcombo.place(x=50, y=5)
+        langcombo.place(x=250, y=5)
         self._langcombo = langcombo
 
         self._grid = create_grid()
@@ -229,7 +229,7 @@ class WordleGWindow:
 
     def set_color_scheme(self, event):
         selection = self._combo.get()
-
+        print(selection)
         return selection
 
     def get_language(self):
@@ -237,6 +237,7 @@ class WordleGWindow:
 
     def set_language(self, event):
         selection = self._langcombo.get()
+        print(selection)
         return selection
 
 

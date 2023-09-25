@@ -9,16 +9,12 @@ import random
 import importlib
 import WordleGraphics
 
-from WordleDictionary import FIVE_LETTER_WORDS
+from WordleDictionary import ENGLISH_WORDS, ITALIAN_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 
 def wordle():
-    wordToGuess = random.choice(FIVE_LETTER_WORDS)
-
-    lettersUsed = []
-
-    print(wordToGuess)
+    wordToGuess = random.choice(ENGLISH_WORDS)
 
     def enter_action(s):
         scheme = gw.get_color_scheme()
@@ -31,9 +27,22 @@ def wordle():
             CORRECT_COLOR = "#0047AB"
             PRESENT_COLOR = "#D2042D"  # Brownish yellow for misplaced letters
             MISSING_COLOR = "#999999"
+        WORDS = []
+        lang = gw.get_language()
+        if lang == "English":
+            wordToGuess = random.choice(ENGLISH_WORDS)
+            WORDS = ENGLISH_WORDS
+            # print(wordToGuess)
+        elif lang == "Italian":
+            wordToGuess = random.choice(ITALIAN_WORDS)
+            WORDS = ITALIAN_WORDS
+            # print(wordToGuess)
+
+        lettersUsed = []
+
         lettersLeft = list(wordToGuess)
-        print(s)
-        if s.lower() in FIVE_LETTER_WORDS:
+
+        if s.lower() in WORDS:
             # Find all green colored squares
             for n in range(0, len(wordToGuess)):
                 letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
