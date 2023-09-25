@@ -50,6 +50,7 @@ KEY_LABELS = [
 ]
 
 COLOR_OPTIONS = ["Original", "America"]
+LANG_OPTIONS = ["English", "Italian"]
 
 
 CLICK_MAX_DISTANCE = 2
@@ -172,6 +173,12 @@ class WordleGWindow:
         combo.place(x=5, y=5)
         self._combo = combo
 
+        langcombo = ttk.Combobox(state="readonly", values=LANG_OPTIONS)
+        langcombo.set("English")
+        langcombo.bind("<<ComboboxSelected>>", self.set_language)
+        langcombo.place(x=50, y=5)
+        self._langcombo = langcombo
+
         self._grid = create_grid()
         self._message = create_message()
         self._keys = create_keyboard()
@@ -223,6 +230,13 @@ class WordleGWindow:
     def set_color_scheme(self, event):
         selection = self._combo.get()
 
+        return selection
+
+    def get_language(self):
+        return self._langcombo.get()
+
+    def set_language(self, event):
+        selection = self._langcombo.get()
         return selection
 
 
