@@ -15,11 +15,17 @@ from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 def wordle():
     wordToGuess = random.choice(ENGLISH_WORDS)
+    print(wordToGuess)
     WORDS = ENGLISH_WORDS
     language = "English"
 
     def enter_action(s):
+        # Get color scheme
         scheme = gw.get_color_scheme()
+        nonlocal WORDS
+        nonlocal wordToGuess
+        nonlocal language
+
         if scheme == "Original":
             CORRECT_COLOR = "#66BB66"
             PRESENT_COLOR = "#CCBB66"  # Brownish yellow for misplaced letters
@@ -30,27 +36,43 @@ def wordle():
             PRESENT_COLOR = "#D2042D"  # Brownish yellow for misplaced letters
             MISSING_COLOR = "#999999"
 
+        # Get language from gw object
         lang = gw.get_language()
-
-        if lang == language:
-            pass
-        elif lang == "English":
-            wordToGuess = random.choice(ENGLISH_WORDS)
-            WORDS.clear()
-            WORDS = ENGLISH_WORDS
-            # print(wordToGuess)
-        elif lang == "Italian":
-            WORDS.clear()
-            wordToGuess = random.choice(ITALIAN_WORDS)
-            WORDS = ITALIAN_WORDS
-            # print(wordToGuess)
+        print(wordToGuess)
+        print(lang)
+        print(language)
+        print(len(WORDS))
 
         lettersUsed = []
 
         lettersLeft = list(wordToGuess)
 
+        print(lettersLeft)
+
+        # don't change word or dictionary if language is same
+        if lang == language:
+            print("in if")
+            pass
+        elif lang == "English":
+            wordToGuess = random.choice(ENGLISH_WORDS)
+            WORDS.clear()
+            WORDS = ENGLISH_WORDS
+            print(wordToGuess)
+            language = lang
+            lettersLeft.clear()
+        elif lang == "Italian":
+            WORDS.clear()
+            print(len(WORDS))
+            wordToGuess = random.choice(ITALIAN_WORDS)
+            WORDS = ITALIAN_WORDS
+            print(len(WORDS))
+            language = lang
+            lettersLeft.clear()
+            print(wordToGuess)
+
         if s.lower() in WORDS:
             # Find all green colored squares
+            print(len(wordToGuess))
             for n in range(0, len(wordToGuess)):
                 letterGuess = gw.get_square_letter(gw.get_current_row(), n).lower()
 

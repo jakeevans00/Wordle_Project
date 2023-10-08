@@ -229,7 +229,7 @@ class WordleGWindow:
 
     def set_color_scheme(self, event):
         selection = self._combo.get()
-        print(selection)
+        # print(selection)
         return selection
 
     def get_language(self):
@@ -237,7 +237,7 @@ class WordleGWindow:
 
     def set_language(self, event):
         selection = self._langcombo.get()
-        print(selection)
+        # print(selection)
         return selection
 
 
